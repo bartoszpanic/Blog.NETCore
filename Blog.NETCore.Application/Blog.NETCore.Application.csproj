@@ -5,7 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Blog.NETCore.Domain\Blog.NETCore.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Functions\Comments\Commands\" />
+    <Folder Include="Functions\Comments\Queries\GetCommentsList\" />
+    <Folder Include="Functions\Comments\Queries\GetCommentDetail\" />
+    <Folder Include="Functions\Posts\Commands\" />
+    <Folder Include="Functions\Posts\Queries\GetPostsList\" />
+    <Folder Include="Functions\Posts\Queries\GetPostDetail\" />
   </ItemGroup>
 
 </Project>
