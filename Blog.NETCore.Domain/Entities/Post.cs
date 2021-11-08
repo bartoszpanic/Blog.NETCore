@@ -10,6 +10,7 @@ namespace Blog.NETCore.Domain.Entities
         public string Title { get; set; }
         public string Content { get; set; }
         public string Description { get; set; }
-        public List<Comment> Comments { get; set; }
+        public string ImageUrl { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }
