@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Functions\Comments\Commands\" />
     <Folder Include="Functions\Comments\Queries\GetCommentsList\" />
     <Folder Include="Functions\Comments\Queries\GetCommentDetail\" />
   </ItemGroup>
