@@ -20,7 +20,6 @@
     <Folder Include="Functions\Comments\Queries\GetCommentsList\" />
     <Folder Include="Functions\Comments\Queries\GetCommentDetail\" />
     <Folder Include="Functions\Posts\Commands\" />
-    <Folder Include="Functions\Posts\Queries\GetPostDetailWithComments\" />
   </ItemGroup>
 
 </Project>
