@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Blog.NETCore.Application.Middleware.Exceptions;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,10 +15,10 @@ namespace Blog.NETCore.Application.Middleware
             {
                 await next.Invoke(context);
             }
-            catch (Exception e)
+            catch (NotFoundException notFoundEx)
             {
-
-                throw;
+                context.Response.StatusCode = 404;
+                await context.Response.WriteAsync(notFoundEx.Message);
             }
         }
     }
