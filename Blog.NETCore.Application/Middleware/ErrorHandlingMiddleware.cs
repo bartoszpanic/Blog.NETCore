@@ -20,6 +20,11 @@ namespace Blog.NETCore.Application.Middleware
                 context.Response.StatusCode = 404;
                 await context.Response.WriteAsync(notFoundEx.Message);
             }
+            catch (BadRequestException badRequestEx)
+            {
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsync(badRequestEx.Message);
+            }
         }
     }
 }

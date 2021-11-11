@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Blog.NETCore.Application.Middleware;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Blog.NETCore.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddScoped<ErrorHandlingMiddleware>();
 
             return services;
         }
