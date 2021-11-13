@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blog.NETCore.Application.Functions.Posts.Commands.CreatePost
 {
-    public class CreatedPostCommand : IRequest<int>
+    public class CreatedPostCommand : IRequest<CreatedPostCommandResponse>
     {
         public int PostId { get; set; }
         public string Title { get; set; }

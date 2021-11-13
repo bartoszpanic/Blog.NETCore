@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Blog.NETCore.Application.Functions.Posts.Commands.CreatePost
 {
-    public class CreatedPostCommandHandler : IRequestHandler<CreatedPostCommand, int>
+    public class CreatedPostCommandHandler : IRequestHandler<CreatedPostCommand, CreatedPostCommandResponse>
     {
         private readonly IPostRepository _postRepository;
         private readonly IMapper _mapper;
@@ -20,12 +20,19 @@ namespace Blog.NETCore.Application.Functions.Posts.Commands.CreatePost
             _postRepository = postRepository;
         }
 
-        public async Task<int> Handle(CreatedPostCommand request, CancellationToken cancellationToken)
+        public async Task<CreatedPostCommandResponse> Handle(CreatedPostCommand request, CancellationToken cancellationToken)
         {
+            var validator = new CreatedPostCommandValidator(_postRepository);
+            var validatorResult = await validator.ValidateAsync(request);
+
+            if (!validatorResult.IsValid)
+            {
+                return new CreatedPostCommandResponse(validatorResult);
+            }
             var post = _mapper.Map<Post>(request);
             post = await _postRepository.AddAsync(post);
 
-            return post.PostId;
+            return new CreatedPostCommandResponse(post.PostId);
         }
     }
 }
