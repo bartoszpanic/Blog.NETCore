@@ -4,15 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Blog.NETCore.Application.Functions.Comments.Commands
+namespace Blog.NETCore.Application.Functions.Comments.Commands.CreateComment
 {
     public class CreatedCommentCommandValidator : AbstractValidator<CreatedCommentCommand>
     {
-        private readonly ICommentRepository _commentRepository;
-        public CreatedCommentCommandValidator(ICommentRepository commentRepository)
+        public CreatedCommentCommandValidator()
         {
-            _commentRepository = commentRepository;
-
             RuleFor(c => c.Author)
                 .NotNull()
                 .NotEmpty()

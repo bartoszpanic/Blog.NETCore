@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Blog.NETCore.Application.Functions.Comments.Commands
+namespace Blog.NETCore.Application.Functions.Comments.Commands.CreateComment
 {
     public class CreatedCommentCommandHandler : IRequestHandler<CreatedCommentCommand, CreatedCommentCommandResponse>
     {
@@ -23,7 +23,7 @@ namespace Blog.NETCore.Application.Functions.Comments.Commands
 
         public async Task<CreatedCommentCommandResponse> Handle(CreatedCommentCommand request, CancellationToken cancellationToken)
         {
-            var validator = new CreatedCommentCommandValidator(_commentRepository);
+            var validator = new CreatedCommentCommandValidator();
             var validatorResult = await validator.ValidateAsync(request);
 
             if (!validatorResult.IsValid)

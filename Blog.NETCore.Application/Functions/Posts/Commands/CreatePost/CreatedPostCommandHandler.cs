@@ -22,7 +22,7 @@ namespace Blog.NETCore.Application.Functions.Posts.Commands.CreatePost
 
         public async Task<CreatedPostCommandResponse> Handle(CreatedPostCommand request, CancellationToken cancellationToken)
         {
-            var validator = new CreatedPostCommandValidator(_postRepository);
+            var validator = new CreatedPostCommandValidator();
             var validatorResult = await validator.ValidateAsync(request);
 
             if (!validatorResult.IsValid)
