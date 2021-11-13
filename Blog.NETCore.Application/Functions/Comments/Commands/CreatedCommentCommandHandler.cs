@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Blog.NETCore.Application.Functions.Comments.Commands
 {
-    public class CreatedCommentCommandHandler : IRequestHandler<CreatedCommentCommand, int>
+    public class CreatedCommentCommandHandler : IRequestHandler<CreatedCommentCommand, CreatedCommentCommandResponse>
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IMapper _mapper;
@@ -21,12 +21,20 @@ namespace Blog.NETCore.Application.Functions.Comments.Commands
             _mapper = mapper;
         }
 
-        public async Task<int> Handle(CreatedCommentCommand request, CancellationToken cancellationToken)
+        public async Task<CreatedCommentCommandResponse> Handle(CreatedCommentCommand request, CancellationToken cancellationToken)
         {
+            var validator = new CreatedCommentCommandValidator(_commentRepository);
+            var validatorResult = await validator.ValidateAsync(request);
+
+            if (!validatorResult.IsValid)
+            {
+                return new CreatedCommentCommandResponse(validatorResult);
+            }
+
             var comment = _mapper.Map<Comment>(request);
             comment = await _commentRepository.AddAsync(comment);
 
-            return comment.CommentId;
+            return new CreatedCommentCommandResponse(comment.CommentId);
         }
     }
 }

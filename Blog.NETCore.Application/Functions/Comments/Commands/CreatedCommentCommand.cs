@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blog.NETCore.Application.Functions.Comments.Commands
 {
-    public class CreatedCommentCommand : IRequest<int>
+    public class CreatedCommentCommand : IRequest<CreatedCommentCommandResponse>
     {
         public int CommentId { get; set; }
         public string Author { get; set; }

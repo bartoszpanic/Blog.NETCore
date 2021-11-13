@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Blog.NETCore.Application.Interfaces;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,8 +8,11 @@ namespace Blog.NETCore.Application.Functions.Comments.Commands
 {
     public class CreatedCommentCommandValidator : AbstractValidator<CreatedCommentCommand>
     {
-        public CreatedCommentCommandValidator()
+        private readonly ICommentRepository _commentRepository;
+        public CreatedCommentCommandValidator(ICommentRepository commentRepository)
         {
+            _commentRepository = commentRepository;
+
             RuleFor(c => c.Author)
                 .NotNull()
                 .NotEmpty()
