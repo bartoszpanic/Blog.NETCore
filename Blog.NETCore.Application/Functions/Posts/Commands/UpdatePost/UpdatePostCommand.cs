@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blog.NETCore.Application.Functions.Posts.Commands.UpdatePost
 {
-    public class UpdatePostCommand : IRequest
+    public class UpdatePostCommand : IRequest<UpdatePostCommandResponse>
     {
         public int PostId { get; set; }
         public string Title { get; set; }
