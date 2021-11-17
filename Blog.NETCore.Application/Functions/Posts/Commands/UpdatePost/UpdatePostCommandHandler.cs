@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Blog.NETCore.Application.Functions.Posts.Commands.UpdatePost
 {
-    public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand>
+    public class UpdatePostCommandHandler : IRequestHandler<UpdatePostCommand, UpdatePostCommandResponse>
     {
         private readonly IPostRepository _postRepository;
         private readonly IMapper _mapper;
@@ -20,13 +20,19 @@ namespace Blog.NETCore.Application.Functions.Posts.Commands.UpdatePost
             _postRepository = postRepository;
             _mapper = mapper;
         }
-        public async Task<Unit> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
+        public async Task<UpdatePostCommandResponse> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
         {
-            var post = _mapper.Map<Post>(request);
+            var validator = new UpdatePostCommandValidator(_postRepository);
+            var validationResut = await validator.ValidateAsync(request);
+            if (!validationResut.IsValid)
+            {
+                return new UpdatePostCommandResponse(validationResut);
+            }
 
+            var post = _mapper.Map<Post>(request);
             await _postRepository.UpdateAsync(post);
 
-            return Unit.Value;
+            return new UpdatePostCommandResponse(post.PostId);
         }
     }
 }

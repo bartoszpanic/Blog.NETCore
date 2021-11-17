@@ -8,8 +8,12 @@ namespace Blog.NETCore.Application.Functions.Posts.Commands.CreatePost
 {
     public class CreatedPostCommandValidator : AbstractValidator<CreatedPostCommand>
     {
-        public CreatedPostCommandValidator()
+        private readonly IPostRepository _postRepository;
+        public CreatedPostCommandValidator(IPostRepository postRepository)
         {
+            //Added repository for future implementation
+            _postRepository = postRepository;
+
             RuleFor(p => p.Title)
                 .NotEmpty()
                 .WithMessage("{PropertyName} is required")
