@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Blog.NETCore.Application.Functions.Posts.Queries.GetPostsList
 {
-    public class GetPostsListQueryHandler : IRequestHandler<GetPostInListQuery, List<PostInListViewModel>>
+    public class GetPostsListQueryHandler : IRequestHandler<GetPostInListQuery, GetPostInListQueryResponse>
     {
         private readonly IPostRepository _postRepository;
         private readonly IMapper _mapper;
@@ -18,10 +18,12 @@ namespace Blog.NETCore.Application.Functions.Posts.Queries.GetPostsList
             _mapper = mapper;
             _postRepository = postRepository;
         }
-        public async Task<List<PostInListViewModel>> Handle(GetPostInListQuery request, CancellationToken cancellationToken)
+        public async Task<GetPostInListQueryResponse> Handle(GetPostInListQuery request, CancellationToken cancellationToken)
         {
             var posts = await _postRepository.GetAllAsync();
-            return _mapper.Map<List<PostInListViewModel>>(posts);
+            var mapped = _mapper.Map<List<PostInListViewModel>>(posts);
+
+            return new GetPostInListQueryResponse(mapped);
         }
     }
 }
