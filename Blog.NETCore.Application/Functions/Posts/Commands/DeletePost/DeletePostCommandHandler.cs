@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Blog.NETCore.Application.Functions.Posts.Commands.DeletePost
 {
-    public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand>
+    public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand, DeletePostCommandResponse>
     {
         private readonly IPostRepository _postRepository;
 
@@ -17,11 +17,19 @@ namespace Blog.NETCore.Application.Functions.Posts.Commands.DeletePost
         {
             _postRepository = postRepository;
         }
-        public async Task<Unit> Handle(DeletePostCommand request, CancellationToken cancellationToken)
+        public async Task<DeletePostCommandResponse> Handle(DeletePostCommand request, CancellationToken cancellationToken)
         {
+            var validator = new DeletePostCommandValidator();
+            var validationResult = await validator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+            {
+                return new DeletePostCommandResponse(validationResult);
+            }
+
             var postDelete = await _postRepository.GetByIdAsync(request.PostId);
             await _postRepository.DeleteAsync(postDelete);
-            return Unit.Value;
+
+            return new DeletePostCommandResponse(postDelete.PostId);
         }
     }
 }

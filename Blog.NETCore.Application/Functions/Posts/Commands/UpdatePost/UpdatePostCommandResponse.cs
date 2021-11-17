@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Blog.NETCore.Application.Response;
+using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using Blog.NETCore.Application.Response;
 using System.Text;
@@ -9,6 +11,7 @@ namespace Blog.NETCore.Application.Functions.Posts.Commands.UpdatePost
     public class UpdatePostCommandResponse : BaseResponse
     {
         public int? PostId { get; set; }
+
         public UpdatePostCommandResponse() : base()
         {
         }

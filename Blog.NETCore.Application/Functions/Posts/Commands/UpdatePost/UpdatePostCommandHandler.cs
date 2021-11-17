@@ -22,14 +22,14 @@ namespace Blog.NETCore.Application.Functions.Posts.Commands.UpdatePost
         }
         public async Task<UpdatePostCommandResponse> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
         {
-            var validator = new UpdatePostCommandValidator();
-            var validatorResult = await validator.ValidateAsync(request);
-            if (!validatorResult.IsValid)
+            var validator = new UpdatePostCommandValidator(_postRepository);
+            var validationResut = await validator.ValidateAsync(request);
+            if (!validationResut.IsValid)
             {
-                return new UpdatePostCommandResponse(validatorResult);
+                return new UpdatePostCommandResponse(validationResut);
             }
-            var post = _mapper.Map<Post>(request);
 
+            var post = _mapper.Map<Post>(request);
             await _postRepository.UpdateAsync(post);
 
             return new UpdatePostCommandResponse(post.PostId);

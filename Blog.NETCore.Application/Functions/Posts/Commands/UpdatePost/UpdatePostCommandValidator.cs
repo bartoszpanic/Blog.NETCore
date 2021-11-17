@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Blog.NETCore.Application.Interfaces;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,8 +8,12 @@ namespace Blog.NETCore.Application.Functions.Posts.Commands.UpdatePost
 {
     public class UpdatePostCommandValidator : AbstractValidator<UpdatePostCommand>
     {
-        public UpdatePostCommandValidator()
+        private readonly IPostRepository _postRepository;
+        public UpdatePostCommandValidator(IPostRepository postRepository)
         {
+            //Added repository for future implementation
+            _postRepository = postRepository;
+
             RuleFor(p => p.Title)
                .NotEmpty()
                .WithMessage("{PropertyName} is required")
