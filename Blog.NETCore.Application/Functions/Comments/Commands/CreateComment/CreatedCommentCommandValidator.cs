@@ -15,14 +15,14 @@ namespace Blog.NETCore.Application.Functions.Comments.Commands.CreateComment
                 .NotEmpty()
                 .WithMessage("{PropertyName} is required")
                 .MaximumLength(30)
-                .WithMessage("{PropertyName} must not exceed between 80 characters");
+                .WithMessage("{PropertyName} must not exceed between 30 characters");
 
             RuleFor(c => c.Content)
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("{PropertyName} is required")
                 .MaximumLength(200)
-                .WithMessage("{PropertyName} must not exceed between 80 characters");
+                .WithMessage("{PropertyName} must not exceed between 20 characters");
         }
     }
 }
