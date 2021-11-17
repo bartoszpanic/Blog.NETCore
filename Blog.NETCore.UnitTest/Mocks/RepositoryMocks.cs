@@ -92,5 +92,19 @@ namespace Blog.NETCore.UnitTest.Mocks
 
             return p;
         }
+
+        public static Mock<ICommentRepository> GetCommentRepository()
+        {
+            var comments = GetComments();
+
+            var mockCommentRepository = new Mock<ICommentRepository>();
+
+
+        }
+
+        private static List<Comment> GetComments()
+        {
+            return new List<Comment>();
+        }
     }
 }
