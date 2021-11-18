@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.NETCore.Domain", "Blog
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.NETCore.Application", "Blog.NETCore.Application\Blog.NETCore.Application.csproj", "{63CB8A91-8478-4839-8AD9-B78A494C2E45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.NETCore.UnitTest", "Blog.NETCore.UnitTest\Blog.NETCore.UnitTest.csproj", "{9918DF93-C8BC-4C6B-990C-B9B3D2EA8E33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.NETCore.UnitTest", "Blog.NETCore.UnitTest\Blog.NETCore.UnitTest.csproj", "{9918DF93-C8BC-4C6B-990C-B9B3D2EA8E33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

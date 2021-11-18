@@ -25,4 +25,9 @@
     <ProjectReference Include="..\Blog.NETCore.Application\Blog.NETCore.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Comments\" />
+    <Folder Include="Posts\Query\" />
+  </ItemGroup>
+
 </Project>

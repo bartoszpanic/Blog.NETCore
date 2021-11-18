@@ -2,9 +2,7 @@
 using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
-using Blog.NETCore.Application.Response;
 using System.Text;
-using FluentValidation.Results;
 
 namespace Blog.NETCore.Application.Functions.Posts.Commands.UpdatePost
 {
