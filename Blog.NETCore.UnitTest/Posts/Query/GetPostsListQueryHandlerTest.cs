@@ -30,9 +30,8 @@ namespace Blog.NETCore.UnitTest.Posts.Query
             _mapper = configurationProvider.CreateMapper();
         }
         [Fact]
-        public async Task GetPostListTest()
+        public async Task Get_Post_List_Test()
         {
-            var postCount = await _mockRepository.Object.GetAllAsync();
             var handler = new GetPostsListQueryHandler(_mockRepository.Object, _mapper);
 
             var result = await handler.Handle(new GetPostInListQuery(), CancellationToken.None);
