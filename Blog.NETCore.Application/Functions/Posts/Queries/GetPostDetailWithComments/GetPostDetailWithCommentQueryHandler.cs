@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Blog.NETCore.Application.Functions.Posts.Queries.GetPostDetailWithComments
 {
-    public class GetPostDetailWithCommentQueryHandler : IRequestHandler<GetPostDetailWithCommentsQuery, PostDetailWithCommentListViewModel>
+    public class GetPostDetailWithCommentQueryHandler : IRequestHandler<GetPostDetailWithCommentsQuery, GetPostDetailQueryResponse>
     {
         private readonly IPostRepository _postRepository;
         private readonly ICommentRepository _commentRepository;
@@ -20,7 +20,7 @@ namespace Blog.NETCore.Application.Functions.Posts.Queries.GetPostDetailWithComm
             _postRepository = postRepository;
             _mapper = mapper;
         }
-        public async Task<PostDetailWithCommentListViewModel> Handle(GetPostDetailWithCommentsQuery request, CancellationToken cancellationToken)
+        public async Task<GetPostDetailQueryResponse> Handle(GetPostDetailWithCommentsQuery request, CancellationToken cancellationToken)
         {
             var post = await _postRepository.GetByIdAsync(request.PostId);
             var postDetail = _mapper.Map<PostDetailWithCommentListViewModel>(post);
@@ -29,7 +29,7 @@ namespace Blog.NETCore.Application.Functions.Posts.Queries.GetPostDetailWithComm
 
             postDetail.Comments = _mapper.Map<List<PostCommentDto>>(comments);
 
-            return postDetail;
+            return new GetPostDetailQueryResponse(postDetail);
         }
     }
 }
