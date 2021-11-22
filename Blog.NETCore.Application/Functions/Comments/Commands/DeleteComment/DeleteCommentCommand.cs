@@ -8,5 +8,6 @@ namespace Blog.NETCore.Application.Functions.Comments.Commands.DeleteComment
     public class DeleteCommentCommand : IRequest<DeleteCommentCommandResponse>
     {
         public int CommentId { get; set; }
+        public int PostId { get; set; }
     }
 }
