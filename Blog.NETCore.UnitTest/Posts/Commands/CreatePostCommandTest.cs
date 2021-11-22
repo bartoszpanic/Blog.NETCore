@@ -51,5 +51,28 @@ namespace Blog.NETCore.UnitTest.Posts.Commands
             allPosts.Count.ShouldBe(allPostsBeforeCount + 1);
             response.PostId.ShouldNotBeNull();
         }
+
+        [Fact]
+        public async Task Handle_Not_ValidPost_TooLongTitle_81_Characters_NotAddedToRepo()
+        {
+            var handler = new CreatedPostCommandHandler(_mockRepository.Object, _mapper);
+            var allPostBeforeCount = (await _mockRepository.Object.GetAllAsync()).Count;
+
+            var command = new CreatedPostCommand()
+            {
+                Title = new string('*', 81),
+                Description = "Test",
+                Content = "test"
+            };
+
+            var response = await handler.Handle(command, CancellationToken.None);
+
+            var allPosts = await _mockRepository.Object.GetAllAsync();
+
+            response.Success.ShouldBe(false);
+            response.ValidationErrors.Count.ShouldBe(1);
+            allPosts.Count.ShouldBe(allPostBeforeCount);
+            response.PostId.ShouldBeNull();
+        }
     }
 }

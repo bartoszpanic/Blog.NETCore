@@ -110,6 +110,15 @@ namespace Blog.NETCore.UnitTest.Mocks
             var comments = GetComments();
             var mockCommentRepository = new Mock<ICommentRepository>();
 
+            mockCommentRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(comments);
+
+            mockCommentRepository.Setup(repo => repo.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(
+            (int id) =>
+            {
+                var comment = comments.FirstOrDefault(c => c.CommentId == id);
+                return comment;
+            });
+
             mockCommentRepository.Setup(repo => repo.AddAsync(It.IsAny<Comment>())).ReturnsAsync(
                 (Comment comment) =>
                 {

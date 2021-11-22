@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Comments\" />
     <Folder Include="Posts\Query\" />
   </ItemGroup>
 
