@@ -12,6 +12,7 @@ namespace Blog.NETCore.Application.Functions.Comments.Commands.CreateComment
         {
             RuleFor(c => c.Author)
                 .NotNull()
+                .WithMessage("{PropertyName} is required")
                 .NotEmpty()
                 .WithMessage("{PropertyName} is required")
                 .MaximumLength(30)
@@ -19,6 +20,7 @@ namespace Blog.NETCore.Application.Functions.Comments.Commands.CreateComment
 
             RuleFor(c => c.Content)
                 .NotNull()
+                .WithMessage("{PropertyName} is required")
                 .NotEmpty()
                 .WithMessage("{PropertyName} is required")
                 .MaximumLength(200)

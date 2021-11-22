@@ -51,5 +51,27 @@ namespace Blog.NETCore.UnitTest.Comments.Commands
             allComments.Count.ShouldBe(allCommentsBeforeCount + 1);
             response.CommentId.ShouldNotBeNull();
         }
+
+        [Fact]
+        public async Task Handle_Not_ValidComment_EmptyAuthor_Not_AddedToRepo()
+        {
+            var handler = new CreatedCommentCommandHandler(_mockRepository.Object, _mapper);
+
+            var allCommentsBeforeCount = (await _mockRepository.Object.GetAllAsync()).Count;
+
+            var response = await handler.Handle(new CreatedCommentCommand()
+            {
+                Author = "",
+                Content = "test",
+                PostId = 1
+            }, CancellationToken.None);
+
+            var allComments = await _mockRepository.Object.GetAllAsync();
+
+            response.Success.ShouldBe(false);
+            response.ValidationErrors.Count.ShouldBe(1);
+            allComments.Count.ShouldBe(allCommentsBeforeCount);
+            response.CommentId.ShouldBeNull();
+        }
     }
 }
