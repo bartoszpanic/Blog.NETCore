@@ -18,9 +18,4 @@
     <ProjectReference Include="..\Blog.NETCore.Domain\Blog.NETCore.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Functions\Comments\Queries\GetCommentsList\" />
-    <Folder Include="Functions\Comments\Queries\GetCommentDetail\" />
-  </ItemGroup>
-
 </Project>
