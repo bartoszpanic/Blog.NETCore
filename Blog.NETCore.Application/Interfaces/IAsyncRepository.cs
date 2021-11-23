@@ -11,6 +11,6 @@ namespace Blog.NETCore.Application.Interfaces
         Task<IReadOnlyList<T>> GetAllAsync();
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
-        Task DeleteAsync(T enity);
+        Task DeleteAsync(T entity);
     }
 }
