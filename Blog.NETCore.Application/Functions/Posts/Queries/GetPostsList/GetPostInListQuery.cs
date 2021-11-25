@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blog.NETCore.Application.Functions.Posts.Queries.GetPostsList
 {
-    public class GetPostInListQuery : IRequest<GetPostInListQueryResponse>
+    public class GetPostInListQuery : IRequest<List<PostInListViewModel>>
     {
     }
 }

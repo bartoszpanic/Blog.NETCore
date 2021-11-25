@@ -19,7 +19,7 @@ namespace Blog.NETCore.Persistence.EF.DummyData
                 Content = "Trzeba uczyć się bardzo dużo i systematycznie",
                 Description = "Aby nauka nie poszła w las",
                 ImageUrl = "tinyurl.com/uh9kp3xx",
-                Comments = comments.Where(c => c.PostId == 1).ToList()
+                //Comments = comments.Where(c => c.PostId == 1).ToList()
             };
 
             Post p2 = new Post()
@@ -29,7 +29,7 @@ namespace Blog.NETCore.Persistence.EF.DummyData
                 Content = "Dzisiaj krótka lekcja C# dla początkujących którzy chcieli by rozpocząć przygodę z tym oto językiem programowania",
                 Description = "C# dla nowych adeptów programowania",
                 ImageUrl = "tinyurl.com/uh9kp3xx",
-                Comments = comments.Where(c => c.PostId == 2).ToList()
+                //Comments = comments.Where(c => c.PostId == 2).ToList()
             };
 
             Post p3 = new Post()
@@ -39,7 +39,7 @@ namespace Blog.NETCore.Persistence.EF.DummyData
                 Content = "Dzisiaj pokaże wam kuchnię dla ludzi opornych, a co za tym idzie dla leniwych i nie posiadających zmysłu kulinarnego",
                 Description = "Gotowanie",
                 ImageUrl = "tinyurl.com/3yj4twea",
-                Comments = comments.Where(c => c.PostId == 3).ToList()
+                //Comments = comments.Where(c => c.PostId == 3).ToList()
             };
 
             Post p4 = new Post()
@@ -49,7 +49,7 @@ namespace Blog.NETCore.Persistence.EF.DummyData
                 Content = "Dzisiaj pokaże Ci diete dzięki której zgubisz zbędne kilogramy siedząc przed komputerem i pisząc kod",
                 Description = "Dieta",
                 ImageUrl = "tinyurl.com/3yj4twea",
-                Comments = comments.Where(c => c.PostId == 4).ToList()
+                //Comments = comments.Where(c => c.PostId == 4).ToList()
             };
 
             Post p5 = new Post()
@@ -60,7 +60,7 @@ namespace Blog.NETCore.Persistence.EF.DummyData
                 "jakości do ceny w 2021 roku",
                 Description = "Elektronika",
                 ImageUrl = "tinyurl.com/fvy9pp7m",
-                Comments = comments.Where(c => c.PostId == 5).ToList()
+                //Comments = comments.Where(c => c.PostId == 5).ToList()
             };
 
             List<Post> p = new List<Post>();

@@ -16,6 +16,7 @@ namespace Blog.NETCore.Application.Mapper
         public MappingProfile()
         {
             CreateMap<Post, PostInListViewModel>().ReverseMap();
+            CreateMap<PostInListViewModel, GetPostInListQueryResponse>().ReverseMap();
             CreateMap<Post, PostDetailWithCommentListViewModel>().ReverseMap();
             CreateMap<Comment, CommentDto>().ReverseMap();
             CreateMap<Comment, CreatedCommentCommand>().ReverseMap();

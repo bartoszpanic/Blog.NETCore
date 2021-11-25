@@ -51,7 +51,5 @@ namespace Blog.NETCore.Persistence.EF
                 modelBuilder.Entity<Post>().HasData(item);
             }
         }
-
-        
     }
 }

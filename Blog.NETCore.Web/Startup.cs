@@ -55,6 +55,7 @@ namespace Blog.NETCore.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors("Open");
 
             app.UseAuthorization();
 
