@@ -1,4 +1,7 @@
-﻿using Blog.NETCore.Application.Functions.Posts.Queries.GetPostDetailWithComments;
+﻿using Blog.NETCore.Application.Functions.Posts.Commands.CreatePost;
+using Blog.NETCore.Application.Functions.Posts.Commands.DeletePost;
+using Blog.NETCore.Application.Functions.Posts.Commands.UpdatePost;
+using Blog.NETCore.Application.Functions.Posts.Queries.GetPostDetailWithComments;
 using Blog.NETCore.Application.Functions.Posts.Queries.GetPostsList;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +36,34 @@ namespace Blog.NETCore.API.Controllers
         {
             var detailViewModel = await _mediator.Send(new GetPostDetailWithCommentsQuery() { PostId = id });
             return Ok(detailViewModel);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<int>> Create([FromBody] CreatedPostCommand createdPostCommand)
+        {
+            var result = await _mediator.Send(createdPostCommand);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult<int>> Update([FromBody] UpdatePostCommand updatePostCommand)
+        {
+            var result = await _mediator.Send(updatePostCommand);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}", Name = "DeletePost")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var detelePostCommand = new DeletePostCommand() { PostId = id };
+            await _mediator.Send(detelePostCommand);
+            return NoContent();
         }
     }
 }
