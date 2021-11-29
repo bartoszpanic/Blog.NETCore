@@ -36,7 +36,7 @@ namespace Blog.NETCore.Persistence.EF.Repositories
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _context.Set<T>().FindAsync();
+            return await _context.Set<T>().FindAsync(new object[] {id});
         }
 
         public async Task UpdateAsync(T entity)

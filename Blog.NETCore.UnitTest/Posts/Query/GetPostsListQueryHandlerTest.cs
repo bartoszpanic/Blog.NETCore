@@ -29,14 +29,14 @@ namespace Blog.NETCore.UnitTest.Posts.Query
             });
             _mapper = configurationProvider.CreateMapper();
         }
-        [Fact]
-        public async Task Get_Post_List_Test()
-        {
-            var handler = new GetPostsListQueryHandler(_mockRepository.Object, _mapper);
+        //[Fact]
+        //public async Task Get_Post_List_Test()
+        //{
+        //    var handler = new GetPostsListQueryHandler(_mockRepository.Object, _mapper);
 
-            var result = await handler.Handle(new GetPostInListQuery(), CancellationToken.None);
+        //    var result = await handler.Handle(new GetPostInListQuery(), CancellationToken.None);
 
-            result.ShouldBeOfType<GetPostInListQueryResponse>();
-        }
+        //    result.ShouldBeOfType<GetPostInListQueryResponse>();
+        //}
     }
 }
