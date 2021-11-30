@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Blog.NETCore.Application.Functions.Comments.Commands.CreateComment;
+using Blog.NETCore.Application.Functions.Comments.Commands.UpdateComment;
 using Blog.NETCore.Application.Functions.Posts.Commands.CreatePost;
 using Blog.NETCore.Application.Functions.Posts.Commands.UpdatePost;
 using Blog.NETCore.Application.Functions.Posts.Queries.GetPostDetailWithComments;
@@ -23,6 +24,7 @@ namespace Blog.NETCore.Application.Mapper
             CreateMap<PostCommentDto, Post>().ReverseMap();
             CreateMap<Post, CreatedPostCommand>().ReverseMap();
             CreateMap<Post, UpdatePostCommand>().ReverseMap();
+            CreateMap<Comment, UpdateCommentCommand>().ReverseMap();
         }
     }
 }
