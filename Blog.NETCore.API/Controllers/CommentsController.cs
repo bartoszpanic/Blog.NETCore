@@ -1,9 +1,11 @@
 ﻿using Blog.NETCore.Application.Functions.Comments.Commands.CreateComment;
 using Blog.NETCore.Application.Functions.Comments.Commands.DeleteComment;
 using Blog.NETCore.Application.Functions.Comments.Commands.UpdateComment;
+using Blog.NETCore.Application.Middleware.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace Blog.NETCore.API.Controllers
@@ -13,14 +15,17 @@ namespace Blog.NETCore.API.Controllers
     public class CommentsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public CommentsController(IMediator mediator)
+        private readonly ILogger<CommentsController> _logger;
+        public CommentsController(IMediator mediator, ILogger<CommentsController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpPost(Name = "AddComment")]
         public async Task<ActionResult<CreatedCommentCommandResponse>> Create([FromBody] CreatedCommentCommand createdCategoryCommand)
         {
+            _logger.LogInformation("Create comment action invoked");
             var response = await _mediator.Send(createdCategoryCommand);
             return Ok(response);
         }
@@ -32,6 +37,7 @@ namespace Blog.NETCore.API.Controllers
         public async Task<ActionResult<int>> Update([FromBody] UpdateCommentCommand updateCommentCommand)
         {
             var result = await _mediator.Send(updateCommentCommand);
+            _logger.LogInformation($"Comment with id : {updateCommentCommand.CommentId}, Update action invoked");
             return Ok(result);
         }
 
@@ -41,6 +47,8 @@ namespace Blog.NETCore.API.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(int id)
         {
+            _logger.LogWarning($"Comment with id : {id}, Delete action invoked");
+
             var deteleCommentCommand = new DeleteCommentCommand() { CommentId = id };
             await _mediator.Send(deteleCommentCommand);
             return NoContent();

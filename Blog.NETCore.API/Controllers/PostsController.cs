@@ -6,6 +6,7 @@ using Blog.NETCore.Application.Functions.Posts.Queries.GetPostsList;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -16,9 +17,11 @@ namespace Blog.NETCore.API.Controllers
     public class PostsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public PostsController(IMediator mediator)
+        private readonly ILogger<PostsController> _logger;
+        public PostsController(IMediator mediator, ILogger<PostsController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet(Name = "GetAllPosts")]
@@ -41,6 +44,7 @@ namespace Blog.NETCore.API.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> Create([FromBody] CreatedPostCommand createdPostCommand)
         {
+            _logger.LogInformation("Create post action invoked");
             var result = await _mediator.Send(createdPostCommand);
             return Ok(result);
         }
@@ -52,6 +56,7 @@ namespace Blog.NETCore.API.Controllers
         public async Task<ActionResult<int>> Update([FromBody] UpdatePostCommand updatePostCommand)
         {
             var result = await _mediator.Send(updatePostCommand);
+            _logger.LogInformation($"Post with id : {updatePostCommand.PostId}, Update action invoked");
             return Ok(result);
         }
 
@@ -61,6 +66,7 @@ namespace Blog.NETCore.API.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(int id)
         {
+            _logger.LogWarning("Delete post action invoked");
             var detelePostCommand = new DeletePostCommand() { PostId = id };
             await _mediator.Send(detelePostCommand);
             return NoContent();

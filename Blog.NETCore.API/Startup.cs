@@ -31,6 +31,7 @@ namespace Blog.NETCore.API
             services.AddApplication();
             services.AddInfrastructure(Configuration);
             services.AddControllers();
+            services.AddSingleton<ILogNLog, LogNLog>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog.NETCore.API", Version = "v1" });
